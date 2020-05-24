@@ -26,7 +26,9 @@ struct Mat2 {
 };
 
 Mat2 operator*(Mat2 const& m_1, Mat2 const& m_2);
+
 Vec2 operator*(Vec2 const& v, Mat2 const& m);
+Vec2 operator*(Mat2 const& m, Vec2 const&v);
 
 Mat2 inverse ( Mat2 const & m );
 Mat2 transpose ( Mat2 const & m );

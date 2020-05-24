@@ -41,6 +41,10 @@ Vec2 operator*(Vec2 const& v, Mat2 const& m){
     return result;
 }
 
+Vec2 operator*(Mat2 const& m, Vec2 const& v){
+    // TODO: Test
+    return {v*m};
+}
 
 Mat2 inverse (Mat2 const & m){
     // TODO: test
