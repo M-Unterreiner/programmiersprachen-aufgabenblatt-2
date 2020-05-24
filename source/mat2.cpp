@@ -18,6 +18,10 @@ Mat2& Mat2::operator*=(Mat2 const& m){
     return *this;
 }
 
+float Mat2::det()const {
+    return (e_00 * e_11) - (e_10 * e_01);
+}
+
 void Mat2::printMat(){
     std::cout << e_00 << " " << e_10 << std::endl;
     std::cout << e_01 << " " << e_11 << std::endl;
@@ -26,13 +30,52 @@ void Mat2::printMat(){
 
 
 Mat2 operator*(Mat2 const& m_1, Mat2 const& m_2){
-    // Mat2 m_res{};
-
-    // m_res.e_00 = m_1.e_00 * m_2.e_00 + m_1.e_10 * m_2.e_10;  
-    // m_res.e_10 = m_1.e_00 * m_2.e_01 + m_1.e_01 * m_2.e_11;
-    // m_res.e_01 = m_1.e_10 * m_2.e_00 + m_1.e_10 * m_2.e_10;
-    // m_res.e_11 = m_1.e_10 * m_2.e_01 + m_1.e_11 * m_2.e_11;  
-
-    //return m_res;
     return Mat2{m_1} *=m_2;
+}
+
+Vec2 operator*(Vec2 const& v, Mat2 const& m){
+    // TODO: Test
+    float x = m.e_00 * v.x + m.e_10 * v.y;
+    float y = m.e_01 * v.x + m.e_11 * v.y;
+    Vec2 result{x, y};
+    return result;
+}
+
+
+Mat2 inverse (Mat2 const & m){
+    // TODO: test
+    if (m.det() == 0)
+    {
+        Mat2 invMat;
+
+        // swap the Positiion and put the negatives
+        invMat.e_00 = 1 / m.det() * m.e_11;
+        invMat.e_01 = 1 / m.det() * m.e_01 * (-1);
+        invMat.e_10 = 1 / m.det() * m.e_10 * (-1);
+        invMat.e_11 = 1 / m.det() * m.e_00;
+
+        return invMat;
+    }
+    else
+    {
+        std::cout << "Inverse is not possible";
+        return m;
+    }
+}
+
+Mat2 transpose (Mat2 const & m){
+    // TODO: test
+
+    Mat2 transMat;
+
+    transMat.e_00 = m.e_00;
+    transMat.e_01 = m.e_10;
+    transMat.e_10 = m.e_01;
+    transMat.e_11 = m.e_11;
+    return transMat;
+}
+
+Mat2 make_rotation_mat2 (float phi){
+    // TODO: test
+    return Mat2{std::cos(phi), -std::sin(phi), std::sin(phi), std::cos(phi)};
 }

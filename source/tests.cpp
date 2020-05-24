@@ -139,10 +139,7 @@ TEST_CASE("2.5 Matrixmultiplikation"){
     Mat2 mat1{1.0f,2.0f,3.0f,4.0f};
     Mat2 mat2{4.0f,5.0f,1.0f,2.0f};
 
-    mat1.printMat();
-    mat2.printMat();
     mat1 *= mat2;
-    mat1.printMat();
     
     REQUIRE (mat1.e_00 == Approx(6.0f));
     REQUIRE (mat1.e_01 == Approx(9.0f));
@@ -153,11 +150,8 @@ TEST_CASE("2.5 Matrixmultiplikation"){
   SECTION ("Test operator *= as a free function"){  
     Mat2 mat1{1.0f,2.0f,3.0f,4.0f};
     Mat2 mat2{4.0f,5.0f,1.0f,2.0f};
-    std::cout << "############## *= Free function"; 
-    mat1.printMat();
-    mat2.printMat();  
+
     mat1 *= mat2;
-    mat1.printMat();
 
     REQUIRE (mat1.e_00 == Approx(6.0f));
     REQUIRE (mat1.e_01 == Approx(9.0f));
