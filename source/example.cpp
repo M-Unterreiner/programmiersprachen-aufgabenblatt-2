@@ -2,6 +2,11 @@
 #include <GLFW/glfw3.h>
 #include <utility>
 #include <cmath>
+#include "vec2.hpp"
+#include "mat2.hpp"
+#include "rectangle.hpp"
+#include "circle.hpp"
+#include "color.hpp"
 
 
 int main(int argc, char* argv[])
@@ -11,6 +16,43 @@ int main(int argc, char* argv[])
   while (!win.should_close()) {
     if (win.get_key(GLFW_KEY_ESCAPE) == GLFW_PRESS) {
       win.close();
+    }
+
+    auto mouse_position = win.mouse_position();
+    Vec2 position{mouse_position.first, mouse_position.second};
+
+    Vec2 v1 = {100.0f, 300.0f};
+    Vec2 v2 = {500.0f, 500.0f};
+    Vec2 v3 = {400.0f, 400.0f};
+    Vec2 v4 = {600.0f, 600.0f};
+
+    Color c_blue = {0.2f, 0.1f, 0.9f};
+    Color c_red = {1.0f, 0.0f, 0.0f};
+    Color c_pink = {1.0f, 0.0f, 1.0f};
+
+
+    Circle red_circle{10.0f, c_red, v3};
+    red_circle.draw(win);
+
+    if (red_circle.is_inside(position))
+      {
+        red_circle.draw(win, 2.0f);
+      }
+
+    Circle pink_circle{10.0f, c_pink, v3 -= Vec2{50.0f,00.0f}};
+    pink_circle.draw(win, 2.0f);
+
+    if (pink_circle.is_inside(position))
+      {
+        pink_circle.draw(win, 4.0f);
+      }
+    
+    Rectangle blue_rectangle{v1, v2, c_blue};
+    blue_rectangle.draw(win, 1.0f);
+
+    if (blue_rectangle.is_inside(position))
+    {
+      blue_rectangle.draw(win, 5.0f);
     }
 
     bool left_pressed = win.get_mouse_button(GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS;
@@ -30,7 +72,6 @@ int main(int argc, char* argv[])
     win.draw_point(x2, y2, 0.0f, 1.0f, 0.0f);
     win.draw_point(x3, y3, 0.0f, 0.0f, 1.0f);
 
-    auto mouse_position = win.mouse_position();
     if (left_pressed) {
       win.draw_line(30.0f, 30.0f, // FROM pixel idx with coords (x=30, y=30)
                     mouse_position.first, mouse_position.second, // TO mouse position in pixel coords
