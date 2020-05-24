@@ -1,6 +1,7 @@
 #define CATCH_CONFIG_RUNNER
 #include <catch.hpp>
 #include "vec2.hpp"
+#include "mat2.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -118,5 +119,49 @@ TEST_CASE("Aufgabe 2.4"){
     vec2_41 /= s;
     REQUIRE (vec2_41.x == Approx(0.5f));
     REQUIRE (vec2_41.y == Approx(0.5f));
+  }
+
+}
+
+TEST_CASE("2.5 Matrixmultiplikation"){
+  SECTION ("Test operator *= as a memberfunction"){  
+    Mat2 mat1{1.0f,2.0f,3.0f,4.0f};
+    Mat2 mat2{4.0f,5.0f,1.0f,2.0f};
+
+    mat1 *= mat2;
+    REQUIRE (mat1.e_00 == Approx(6.0f));
+    REQUIRE (mat1.e_01 == Approx(9.0f));
+    REQUIRE (mat1.e_10 == Approx(16.0f));
+    REQUIRE (mat1.e_11 == Approx(23.0f));
+  }
+
+  SECTION ("Test operator *= as a memberfunction"){  
+    Mat2 mat1{1.0f,2.0f,3.0f,4.0f};
+    Mat2 mat2{4.0f,5.0f,1.0f,2.0f};
+
+    mat1.printMat();
+    mat2.printMat();
+    mat1 *= mat2;
+    mat1.printMat();
+    
+    REQUIRE (mat1.e_00 == Approx(6.0f));
+    REQUIRE (mat1.e_01 == Approx(9.0f));
+    REQUIRE (mat1.e_10 == Approx(16.0f));
+    REQUIRE (mat1.e_11 == Approx(23.0f)); 
+  }
+  
+  SECTION ("Test operator *= as a free function"){  
+    Mat2 mat1{1.0f,2.0f,3.0f,4.0f};
+    Mat2 mat2{4.0f,5.0f,1.0f,2.0f};
+    std::cout << "############## *= Free function"; 
+    mat1.printMat();
+    mat2.printMat();  
+    mat1 *= mat2;
+    mat1.printMat();
+
+    REQUIRE (mat1.e_00 == Approx(6.0f));
+    REQUIRE (mat1.e_01 == Approx(9.0f));
+    REQUIRE (mat1.e_10 == Approx(16.0f));
+    REQUIRE (mat1.e_11 == Approx(23.0f));
   }
 }

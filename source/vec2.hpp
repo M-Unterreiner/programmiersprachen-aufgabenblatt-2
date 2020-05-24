@@ -1,4 +1,5 @@
 // Vec2.hpp
+
 #ifndef VEC2_HPP
 #define VEC2_HPP
 
