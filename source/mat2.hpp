@@ -18,10 +18,10 @@ struct Mat2 {
     float e_11 = 1.0f;
     
     float det()const ;
-
+    
     Mat2& operator*=(Mat2 const& m);
-
-
+    
+    
     void printMat();
 };
 

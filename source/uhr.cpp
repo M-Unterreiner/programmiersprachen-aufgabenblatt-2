@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
     win.draw_line(center.x, center.y, hour_hand.x + 200.0f, hour_hand.y + 200.0f, 0.0f, 0.0f, 1.0f, 1.5f);
 
     win.draw_text(10.0f, 10.0f, 15.0f, std::to_string(sec) + " : ");
-    win.draw_text(65.0f, 10.0f, 15.0f, std::to_string(min) + " : ");
+    win.draw_text(67.0f, 10.0f, 15.0f, std::to_string(min) + " : ");
     win.draw_text(120.0f, 10.0f, 15.0f, std::to_string(hour));
     win.update();
   }
