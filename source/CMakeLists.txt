@@ -8,6 +8,7 @@ add_executable(example
   rectangle.cpp
   example.cpp
   )
+
 target_link_libraries(example
   glfw
   ${GLFW_LIBRARIES}
@@ -34,4 +35,21 @@ target_link_libraries(tests
   ${OPENGL_LIBRARIES}
   )
 
+add_executable(uhr
+  window.cpp
+  glew.c
+  vec2.cpp
+  mat2.cpp
+  circle.cpp
+  rectangle.cpp
+  uhr.cpp
+  )
 
+target_link_libraries(uhr
+glfw
+${GLFW_LIBRARIES}
+nanovg
+${OPENGL_LIBRARIES}
+)
+
+add_dependencies(uhr glfw nanovg ${COPY_BINARY})
